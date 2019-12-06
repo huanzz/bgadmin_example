@@ -67,12 +67,13 @@
     <div class="box box-default">
         <div class="box-header">
             <h3>评论</h3>
-            <div class="callout">
+            <div class="callout ">
                 <form class="form-horizontal" action="#">
                     <div class="form-group">
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="commentName" name="commentName" placeholder="请输入您的昵称">
                             <input type="hidden" class="form-control" id="articleId" name="articleId" value="{{.article.Id}}">
+                            <input type="hidden" class="form-control" id="replyTo" name="replyTo" value="0" >
                         </div>
                         <div class="col-sm-6">
                             <input type="email" class="form-control" id="commentEmail"  name="commentEmail" placeholder="请输入您的邮箱">
@@ -96,11 +97,19 @@
                 <div class="pull-right">
                     <small>
                         <i class="fa fa-clock-o"> {{.Createtime.Format "2006-01-02 "}}</i>
+
                     </small>
                 </div>
-                <h4><i class="icon fa fa-user-circle-o"></i> {{.Writer}}<small>Email：{{.Email}}  </small></h4>
-                <small>【{{.Floor}}楼】评论：  </small>
+                <h4><i class="fa fa-user-circle-o"></i> {{.Writer}}<small>Email：{{.Email}}  </small></h4>
+                <small>
+                    {{if eq .Reply 0}}
+                        【{{.Floor}}楼】评论文章：
+                    {{else}}
+                        【{{.Floor}}楼】回复【{{.Reply}}楼】：
+                    {{end}}
+                </small>
                 {{.Context}}
+                <a class="btn btn-sm" onclick="replyModal({{.Floor}})"><span class="text-purple">回复</span></a>
             </div>
             {{end}}
 
@@ -108,42 +117,110 @@
     </div>
 </div>
 
-<script src="/static/admin/bower_components/jquery/dist/jquery.min.js"></script>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">回复</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="#">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="replyName" name="replyName" placeholder="请输入您的昵称">
+                            <input type="hidden" class="form-control" id="replyArticleId" name="replyArticleId" value="{{.article.Id}}">
+                            <input type="hidden" class="form-control" id="replyId" name="replyId" >
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="email" class="form-control" id="replyEmail"  name="replyEmail" placeholder="请输入您的邮箱">
+                        </div>
 
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 ">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="reply" name="reply" placeholder="请输入您的评论">
+                                <a class="btn input-group-addon" onclick="replyComment()"><i class="fa fa-paper-plane-o text-purple"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/admin/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/static/admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script>
-    function comment() {
-        var writer = $("#commentName").val()
-        var email = $("#commentEmail").val()
-        var context = $("#comment").val()
-        var articleId = $("#articleId").val()
+
+    // 回复楼层 Modal 弹框
+    function replyModal(replyFloor) {
+        $("#replyId").val(replyFloor);
+        document.getElementById("myModalLabel" ).innerHTML = '回复【'+replyFloor+'楼】';
+        $('#myModal').modal();
+    }
+
+    //向后台post
+    function postData(writer, email, context, articleId,reply) {
         var pattern= /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
         strEmail=pattern.test(email);
         if (strEmail){
-            $.ajax({
-                method:"post",
-                dataType:"json",
-                url:"/blog/comment",
-                data:{
-                    writer:writer,
-                    email:email,
-                    context:context,
-                    articleId:articleId,
-                },
-                success:function (res) {
-                    alert(res.msg);
-                    window.location.href="/blog/content?Id="+articleId;
-                },
-                error:function (res) {
-                    alert(res.msg);
-                }
+            if (writer == '' || email == '' || context == ''){
+                alert("请输入完整的信息")
+            }else {
+                $.ajax({
+                    method:"post",
+                    dataType:"json",
+                    url:"/blog/comment",
+                    data:{
+                        writer:writer,
+                        email:email,
+                        context:context,
+                        articleId:articleId,
+                        reply:reply,
+                    },
+                    success:function (res) {
+                        alert(res.msg);
+                        window.location.href="/blog/content?Id="+articleId;
+                    },
+                    error:function (res) {
+                        alert(res.msg);
+                    }
+                })
+            }
 
-            })
         }else {
             alert("邮箱格式不正确")
         }
 
+    }
 
+    //评论文章
+    function comment() {
+        var writer = $("#commentName").val();
+        var email = $("#commentEmail").val();
+        var context = $("#comment").val();
+        var reply = $("#replyTo").val();
+        var articleId = $("#articleId").val();
+        postData(writer, email, context, articleId,reply);
 
+    }
+
+    //回复评论
+    function replyComment() {
+        var writer = $("#replyName").val();
+        var email = $("#replyEmail").val();
+        var context = $("#reply").val();
+        var reply = $("#replyId").val();
+        var articleId = $("#replyArticleId").val();
+        postData(writer, email, context, articleId,reply);
     }
 
 </script>

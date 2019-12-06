@@ -1,9 +1,9 @@
 package routers
 
 import (
-	"bgadmin/controllers"
-	"bgadmin/controllers/admin"
-	"bgadmin/filter"
+	"github.com/huanzz/bgadmin_example/controllers"
+	"github.com/huanzz/bgadmin_example/controllers/admin"
+	"github.com/huanzz/bgadmin_example/filter"
 	"github.com/astaxie/beego"
 )
 
@@ -88,4 +88,9 @@ func init() {
 	beego.Router("/admin/articletag/edit", &admin.ArticleController{},"*:TagEditPage")
 	beego.Router("/admin/articletag/save", &admin.ArticleController{},"*:TagSave")
 	beego.Router("/admin/articletag/del", &admin.ArticleController{},"*:TagDel")
+
+	//后台--文章管理--评论
+	beego.Router("/admin/articlecomment/list", &admin.ArticleController{},"*:CommentList")
+	beego.Router("/admin/articlecomment/del", &admin.ArticleController{},"*:CommentDel")
+
 }

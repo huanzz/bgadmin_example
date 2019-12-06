@@ -6,6 +6,7 @@ import (
 	"time"
 	"log"
 	"errors"
+	. "github.com/huanzz/bgadmin_example/common"
 )
 
 type Comment struct {
@@ -14,6 +15,7 @@ type Comment struct {
 	Email 		string			`valid:"Email;Required"`
 	Context 	string			`valid:"Required"`
 	Floor		int				`valid:"Required"`
+	Reply		int				`valid:"Required"`
 	Article		*Article		`orm:"rel(fk)"`
 	Createtime	time.Time		`orm:"type(datetime);auto_now_add"`
 }
@@ -23,6 +25,7 @@ func init () {
 	orm.RegisterModel(new(Comment))
 }
 
+// Check Comment
 func CheckComment(comment *Comment) (err error) {
 	valid := validation.Validation{}
 	b, _ := valid.Valid(&comment)
@@ -35,6 +38,7 @@ func CheckComment(comment *Comment) (err error) {
 	return nil
 }
 
+// Insert Comment
 func InsertComment(comment Comment) (int64, error) {
 	if err := CheckComment(&comment); err != nil{
 		return 0, err
@@ -46,10 +50,12 @@ func InsertComment(comment Comment) (int64, error) {
 	comm.Context = comment.Context
 	comm.Article = comment.Article
 	comm.Floor = comment.Floor
+	comm.Reply = comment.Reply
 	id, err := o.Insert(comm)
 	return id,err
 }
 
+// Update Comment
 func UpdateComment(comment Comment) (int64, error) {
 	if err := CheckComment(&comment); err != nil{
 		return 0, err
@@ -68,6 +74,9 @@ func UpdateComment(comment Comment) (int64, error) {
 	if comment.Floor != -1 {
 		comm.Floor = comment.Floor
 	}
+	if comment.Reply != -1 {
+		comm.Reply = comment.Reply
+	}
 	if comment.Article != nil{
 		article := GetArticleById(comment.Article.Id)
 		comm.Article = &article
@@ -76,12 +85,31 @@ func UpdateComment(comment Comment) (int64, error) {
 	return num, err
 }
 
+// Delete Comment ById
 func DelCommentById(id int) (int64, error) {
 	o := orm.NewOrm()
 	num, err := o.Delete(&Comment{Id: id})
 	return num, err
 }
 
+// Get Comment List
+func GetCommentList(page int, pageSize int, articleId int) (comments []Comment, count int64)  {
+	o := orm.NewOrm()
+	db := o.QueryTable(new(Comment))
+	offset := PageOffset(page, pageSize)
+	count,_ = db.Limit(pageSize, offset).Filter("Article__Id", articleId).OrderBy("-Createtime").All(&comments)
+	return comments,count
+}
+
+// Total Comment
+func TotalComment(articleId int) (total int64) {
+	o := orm.NewOrm()
+	db := o.QueryTable(new(Comment))
+	total,_ = db.Filter("Article__Id", articleId).Count()
+	return total
+}
+
+// comment show in content web
 func GetCommentByArticle(articleId int) (comments []Comment ,count int64)  {
 	o := orm.NewOrm()
 	db := o.QueryTable(new(Comment))
@@ -89,6 +117,7 @@ func GetCommentByArticle(articleId int) (comments []Comment ,count int64)  {
 	return comments,count
 }
 
+// 上一条 Comment Id
 func LastComment(articleId int) int {
 	var comment Comment
 	o := orm.NewOrm()

@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	common "bgadmin/common"
-	model "bgadmin/models/article"
 	"github.com/astaxie/beego"
+	common "github.com/huanzz/bgadmin_example/common"
+	model "github.com/huanzz/bgadmin_example/models/article"
 )
 
 type BlogController struct {
@@ -20,7 +20,6 @@ func (this *BlogController)Prepare() {
 	this.Data["sidebarCategory"] = categories
 	this.Layout = "blog/layout.html"
 }
-
 
 func (this *BlogController)Index()  {
 	page,_ := this.GetInt("page")
@@ -87,9 +86,10 @@ func (this *BlogController)Comment()  {
 	email := this.GetString("email")
 	context := this.GetString("context")
 	articleId,_ := this.GetInt("articleId")
+	reply,_ := this.GetInt("reply")
 	article := model.GetArticleById(articleId)
 	curFloor := model.LastComment(articleId)
-	comment := model.Comment{Writer:writer,Email:email,Context:context,Article:&article,Floor:curFloor+1}
+	comment := model.Comment{Writer:writer,Email:email,Context:context,Article:&article,Floor:curFloor+1,Reply:reply}
 	_,err := model.InsertComment(comment)
 	res := make(map[string]string)
 	if err!= nil {

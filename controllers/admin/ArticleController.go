@@ -1,9 +1,9 @@
 package admin
 
 import (
-	common "bgadmin/common"
-	admin "bgadmin/models/admin"
-	m "bgadmin/models/article"
+	common "github.com/huanzz/bgadmin_example/common"
+	admin "github.com/huanzz/bgadmin_example/models/admin"
+	m "github.com/huanzz/bgadmin_example/models/article"
 	"log"
 	"strconv"
 )
@@ -26,7 +26,6 @@ func (this *ArticleController)ArticleList()  {
 	this.Data["paginator"] = common.Paginator(page,10, total)
 	this.TplName = "admin/article/article.html"
 }
-
 
 func (this *ArticleController)ArticleAddPage()  {
 	category := m.Category{Id:0}
@@ -255,7 +254,35 @@ func (this *ArticleController)TagDel()  {
 	}else {
 		this.NoteAndJump("Error","删除标签失败", "/admin/articletag/list")
 	}
-
 }
+
+
+//--------------- 文章评论 ----------------------------
+func (this *ArticleController)CommentList()  {
+	articleId,_ := this.GetInt("Id")
+	page,_ := this.GetInt("page")
+	if page == 0{
+		page = 1
+	}
+	article := m.GetArticleById(articleId)
+	comments,_ := m.GetCommentList(page, 100, articleId)
+	total := m.TotalComment(articleId)
+	this.Data["article"] = article
+	this.Data["comments"] = comments
+	this.Data["paginator"] = common.Paginator(page,100, total)
+	this.TplName = "admin/article/comment.html"
+}
+
+func (this *ArticleController)CommentDel()  {
+	Id,_ := this.GetInt("Id")
+	ArticleId:= this.GetString("ArticleId")
+	_,err := m.DelCommentById(Id)
+	if err == nil {
+		this.NoteAndJump("Success","删除评论成功", "/admin/articlecomment/list?Id="+ArticleId)
+	}else {
+		this.NoteAndJump("Error","删除评论失败", "/admin/articlecomment/list?Id="+ArticleId)
+	}
+}
+
 
 

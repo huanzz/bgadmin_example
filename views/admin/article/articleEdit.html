@@ -28,11 +28,16 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">置顶</label>
+                        <label class="col-sm-3 control-label">推荐</label>
                         <div class="col-sm-6 ">
                             <select class="form-control" id="Publish" name="Publish">
-                                <option value="0">否</option>
-                                <option value="1">是</option>
+                                {{if  eq .article.Publish 0}}
+                                    <option value="0" selected>否</option>
+                                    <option value="1">是</option>
+                                {{else}}
+                                    <option value="0">否</option>
+                                    <option value="1" selected>是</option>
+                                {{end}}
                             </select>
                         </div>
                     </div>

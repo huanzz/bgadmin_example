@@ -70,7 +70,6 @@
 
             <section class="content">
                 <div class="row">
-
                     <div class="col-md-9 pull-left" style="height: 100%">
                         {{.LayoutContent}}
 
@@ -91,6 +90,21 @@
                         </div>
                     </div>
                     <div class="col-md-3 pull-right ">
+                        <div class="box box-info">
+                            <div class="box-header text-center">
+                                <h4>分类</h4>
+                            </div>
+                            <div class="box-body">
+                                <ul class="list-unstyled list-inline">
+                                    {{range .sidebarCategory}}
+                                        <li><span><a class="text-purple" href="/blog/category?name={{.Name}}">{{.Name}}</a></span></li>
+                                    {{end}}
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 pull-right ">
                         <div class="box box-warning">
                             <div class="box-header text-center">
                                 <h4>标签</h4>
@@ -106,36 +120,18 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 pull-right ">
-                        <div class="box box-info">
-                            <div class="box-header text-center">
-                                <h4>分类</h4>
-                            </div>
-                            <div class="box-body">
-                                <ul class="list-unstyled list-inline">
-                                    {{range .sidebarCategory}}
-                                        <li><span><a class="text-purple" href="/blog/category?name={{.Name}}">{{.Name}}</a></span></li>
-                                    {{end}}
-                                </ul>
 
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
-
         </div>
     </div>
-
 
     <footer class="main-footer">
         <div class="container">
             <div class="pull-right hidden-xs">
 
-
             </div>
         </div>
-
     </footer>
 </div>
 
@@ -147,7 +143,6 @@
 <script src="/static/admin/bower_components/fastclick/lib/fastclick.js"></script>
 <script src="/static/admin/dist/js/adminlte.min.js"></script>
 <script src="/static/admin/dist/js/demo.js"></script>
-
 <script src="/static/admin/bower_components/layer/layer.js"></script>
 
 

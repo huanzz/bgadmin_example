@@ -9,7 +9,7 @@
                 <div class="box-tools  pull-right col-md-6">
                     <form method="post" action="/admin/article/list" >
                         <div class="input-group">
-                            <input type="text" style="width: 200px;" class="form-control pull-right" name="search" value="{{.search}}"  placeholder="会员名|昵称|邮箱|手机">
+                            <input type="text" style="width: 200px;" class="form-control pull-right" name="search" value="{{.search}}"  placeholder="文章标题">
                             <div class="input-group-btn">
                                 <button type="submit" id="search"  class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
                                 <a  href="/admin/article/list" class="btn btn-default "><i class="fa fa-close"></i></a>
@@ -66,6 +66,7 @@
                             </td>
                             <td>{{.Createtime.Format "2006-01-02 15:04:05 "}}</td>
                             <td>
+                                <a class="btn btn-info" href="/admin/articlecomment/list?Id={{.Id}}">查看评论</a>
                                 <a class="btn btn-success" href="/admin/article/edit?Id={{.Id}}">编辑</a>
                                 <a class="btn btn-danger" href="/admin/article/del?Id={{.Id}}">删除</a>
                             </td>

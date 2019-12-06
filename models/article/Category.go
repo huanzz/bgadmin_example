@@ -5,7 +5,7 @@ import (
 	"github.com/astaxie/beego/validation"
 	"log"
 	"errors"
-	. "bgadmin/common"
+	. "github.com/huanzz/bgadmin_example/common"
 )
 
 type Category struct {
