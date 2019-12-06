@@ -137,28 +137,6 @@ INSERT INTO `comment` VALUES ('39', 'hello', 'hello@163.com', 'hello world', '5'
 INSERT INTO `comment` VALUES ('40', 'Nice', 'nice@qq.com', 'Nice to meet you.', '5', '2019-12-06 17:01:25', '2', '1');
 
 -- ----------------------------
--- Table structure for front_menu
--- ----------------------------
-DROP TABLE IF EXISTS `front_menu`;
-CREATE TABLE `front_menu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pid` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `type` varchar(255) NOT NULL DEFAULT '',
-  `url` varchar(255) NOT NULL DEFAULT '',
-  `status` int(11) NOT NULL DEFAULT '1',
-  `sort` int(11) NOT NULL DEFAULT '0',
-  `level` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  UNIQUE KEY `url` (`url`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of front_menu
--- ----------------------------
-
--- ----------------------------
 -- Table structure for member
 -- ----------------------------
 DROP TABLE IF EXISTS `member`;
