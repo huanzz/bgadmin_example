@@ -1,0 +1,151 @@
+<div class="box box-widget">
+    <div class="box-header text-center">
+        <h2>{{.article.Title}}</h2>
+
+        <div class="row">
+            <div class="col-sm-3 col-xs-6">
+                <div class="description-block border-right">
+                    <span class="description-percentage text-aqua"><i class="fa fa-user"></i></span>
+                    <h5 class="description-header">{{.article.Member.NickName}}</h5>
+                </div>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <div class="description-block border-right">
+                    <span class="description-percentage text-yellow"><i class="fa fa-clock-o"></i> </span>
+                    <h5 class="description-header">{{.article.Createtime.Format "2006-01-02"}}</h5>
+                </div>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <div class="description-block border-right">
+                    <span class="description-percentage text-purple"><i class="fa fa-folder-open"></i></span>
+                    <h5 class="description-header"><a href="/blog/category?name={{.article.Category.Name}}">{{.article.Category.Name}}</a></h5>
+                </div>
+                <!-- /.description-block -->
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-3 col-xs-6">
+                <div class="description-block">
+                    <span class="description-percentage text-red"><i class="fa fa-tags"></i></span>
+                    <h5 class="description-header">
+                        <ul class="list-unstyled list-inline">
+                            {{ range .article.TagSlice }}
+                                <li > <a href="/blog/tag?name={{.name}}">{{.name}}  </a></li>
+                            {{ end }}
+                        </ul>
+                    </h5>
+                </div>
+                <!-- /.description-block -->
+            </div>
+        </div>
+    </div>
+
+    <div class="box-body">
+        <div class="content">
+
+            {{str2html .article.Content}}
+        </div>
+
+    </div>
+
+    <div class="box-footer clearfix">
+        <nav aria-label="...">
+            <ul class="pager">
+                {{ if gt .pre_article.Id 0 }}
+                    <li class="previous"><a href="/blog/content?Id={{.pre_article.Id}}">上一篇：{{ .pre_article.Title }}</a></li>
+                {{ end }}
+                {{ if gt .next_article.Id 0 }}
+                    <li class="next"><a href="/blog/content?Id={{.next_article.Id}}">下一篇：{{ .next_article.Title }}</a></li>
+                {{ end }}
+            </ul>
+        </nav>
+    </div>
+
+</div>
+
+<div class="box box-comments">
+    <div class="box box-default">
+        <div class="box-header">
+            <h3>评论</h3>
+            <div class="callout">
+                <form class="form-horizontal" action="#">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="commentName" name="commentName" placeholder="请输入您的昵称">
+                            <input type="hidden" class="form-control" id="articleId" name="articleId" value="{{.article.Id}}">
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="email" class="form-control" id="commentEmail"  name="commentEmail" placeholder="请输入您的邮箱">
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 ">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="comment" name="comment" placeholder="请输入您的评论">
+                                <a class="btn input-group-addon" onclick="comment()"><i class="fa fa-paper-plane-o text-purple"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="box-body">
+            {{range .commemts}}
+            <div class="alert alert-dismissable">
+                <div class="pull-right">
+                    <small>
+                        <i class="fa fa-clock-o"> {{.Createtime.Format "2006-01-02 "}}</i>
+                    </small>
+                </div>
+                <h4><i class="icon fa fa-user-circle-o"></i> {{.Writer}}<small>Email：{{.Email}}  </small></h4>
+                <small>【{{.Floor}}楼】评论：  </small>
+                {{.Context}}
+            </div>
+            {{end}}
+
+        </div>
+    </div>
+</div>
+
+<script src="/static/admin/bower_components/jquery/dist/jquery.min.js"></script>
+
+<script>
+    function comment() {
+        var writer = $("#commentName").val()
+        var email = $("#commentEmail").val()
+        var context = $("#comment").val()
+        var articleId = $("#articleId").val()
+        var pattern= /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        strEmail=pattern.test(email);
+        if (strEmail){
+            $.ajax({
+                method:"post",
+                dataType:"json",
+                url:"/blog/comment",
+                data:{
+                    writer:writer,
+                    email:email,
+                    context:context,
+                    articleId:articleId,
+                },
+                success:function (res) {
+                    alert(res.msg);
+                    window.location.href="/blog/content?Id="+articleId;
+                },
+                error:function (res) {
+                    alert(res.msg);
+                }
+
+            })
+        }else {
+            alert("邮箱格式不正确")
+        }
+
+
+
+    }
+
+</script>
+
+

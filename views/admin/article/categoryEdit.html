@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <form class="form-horizontal" method="post" action="/admin/articlecategory/save?Id={{.category.Id}}">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">名称</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="Name" name="Name" value="{{.category.Name}}" placeholder="请输入分类名称" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pid" class="col-sm-3 control-label">父级菜单</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="pid"  name="Pid" >
+                                <option value="0">--未分类--</option>
+                                {{range $k,$v := $.cateSelect}}
+                                    <option value="{{.Id}}" {{if eq .Id $.category.Pid}} selected {{end}}>|--{{.Name}}</option>
+                                    {{range $v.Children}}
+                                        <option value="{{.Id}}" {{if eq .Id $.category.Pid}} selected {{end}}>|----{{.Name}}</option>
+                                        {{range .Children}}
+                                            <option value="{{.Id}}" {{if eq .Id $.category.Pid}} selected {{end}}>|--------{{.Name}}</option>
+                                        {{end}}
+                                    {{end}}
+                                {{end}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sort" class="col-sm-3 control-label">排序</label>
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" id="sort" name="Sort" placeholder="请输入排序号" value="{{.category.Sort}}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status" class="col-sm-3 control-label">状态</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="status"  name="Status"  >
+                                {{if eq .category.Status 1 }}
+                                    <option value="1" selected>使用</option>
+                                    <option value="0">禁用</option>
+                                {{else}}
+                                    <option value="1" >使用</option>
+                                    <option value="0" selected>禁用</option>
+                                {{end}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-footer clearfix">
+                    <div class="col-sm-9 pull-right">
+                        <button type="submit" class="btn btn-info">保  存</button>
+                        <button type="button" class="btn btn-warning" onclick="addCancel()">取  消</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script src="/static/admin/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admin/bower_components/wangEditor3/wangEditor.min.js"></script>
+<script>
+    function addCancel() {
+        $("#name").val("");
+        window.location.href="/admin/articlecategory/list";
+    }
+
+
+
+</script>

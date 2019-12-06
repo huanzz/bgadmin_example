@@ -1,0 +1,49 @@
+<div class="box box-success">
+    <div class="box-header">
+        <h3>{{.articleBy}}</h3>
+    </div>
+    <div class="box-body">
+
+        {{if ne .total 0}}
+            {{range .articles}}
+                <div class="box box-default">
+                    <div class="box-header">
+                        <h3 class="box-title" ><a href="/blog/content?Id={{.Id}}"><span class="description-percentage text-gray"><i class=" fa fa-certificate"></i></span>  {{.Title}}</a></h3>
+                        <div class="box-tools pull-right" >
+                            <div class="btn-group">
+                                <a class="btn"><span class="description-percentage text-aqua"><i class="fa fa-user"></i></span> {{.Member.NickName}}</a>
+                                <a class="btn"><span class="description-percentage text-yellow"><i class="fa fa-clock-o"></i></span>  {{.Createtime.Format "2006-01-02 "}} </a>
+                                <a class="btn" href="/blog/category?name={{.Category.Name}}"><span class="description-percentage text-purple"><i class="fa fa-folder-open"></i></span>  {{.Category.Name}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <p>{{.Description}}</p>
+                    </div>
+                    <div class="box-footer">
+                        <div class="box-tools pull" >
+                            <div class="btn-group">
+                                {{ range .TagSlice }}
+                                    <a class="btn" href="/blog/tag?name={{.name}}"><span class="description-percentage text-red"><i class="fa fa-tag"></i></span>   {{.name}}</a>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {{end}}
+        {{else}}
+            <div class="alert  text-center" style="height: 250px">
+                <h3>暂无文章</h3>
+            </div>
+
+        {{end}}
+
+
+
+    </div>
+    <div class="box-footer clearfix">
+        {{template "admin/common/paginator.html".}}
+    </div>
+
+</div>
