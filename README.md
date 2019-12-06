@@ -22,12 +22,12 @@ $ bee run
 7、访问http://localhost:8080
 
 ## 效果展示
-![](https://github.com/huanzz/bgadmin_example/blob/master/__images/aa(1).png)
-![](https://github.com/huanzz/bgadmin_example/blob/master/__images/aa(2).png)
-![](https://github.com/huanzz/bgadmin_example/blob/master/__images/aa(3).png)
-![](https://github.com/huanzz/bgadmin_example/blob/master/__images/aa(4).png)
-![](https://github.com/huanzz/bgadmin_example/blob/master/__images/aa(5).png)
-![](https://github.com/huanzz/bgadmin_example/blob/master/__images/aa(6).png)
+![](https://github.com/huanzz/bgadmin_example/blob/master/__images/aa%20(1).png)
+![](https://github.com/huanzz/bgadmin_example/blob/master/__images/aa%20(2).png)
+![](https://github.com/huanzz/bgadmin_example/blob/master/__images/aa%20(3).png)
+![](https://github.com/huanzz/bgadmin_example/blob/master/__images/aa%20(4).png)
+![](https://github.com/huanzz/bgadmin_example/blob/master/__images/aa%20(5).png)
+![](https://github.com/huanzz/bgadmin_example/blob/master/__images/aa%20(6).png)
 
 ![](https://github.com/huanzz/bgadmin_example/blob/master/__images/1111111.png)
 ![](https://github.com/huanzz/bgadmin_example/blob/master/__images/222.png)
