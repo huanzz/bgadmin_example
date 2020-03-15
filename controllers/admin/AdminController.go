@@ -1,8 +1,8 @@
 package admin
 
 import (
-	"github.com/huanzz/bgadmin_example/common"
-	"github.com/huanzz/bgadmin_example/models/admin"
+	"bgadmin_example/common"
+	"bgadmin_example/models/admin"
 	"errors"
 	"strconv"
 	"strings"

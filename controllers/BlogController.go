@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
-	common "github.com/huanzz/bgadmin_example/common"
-	model "github.com/huanzz/bgadmin_example/models/article"
+	common "bgadmin_example/common"
+	model "bgadmin_example/models/article"
 )
 
 type BlogController struct {

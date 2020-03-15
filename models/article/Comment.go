@@ -6,7 +6,7 @@ import (
 	"time"
 	"log"
 	"errors"
-	. "github.com/huanzz/bgadmin_example/common"
+	. "bgadmin_example/common"
 )
 
 type Comment struct {

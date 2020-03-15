@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="888d3f2d-1a44-4650-b78b-ba574f7b695c" name="Default Changelist" comment="" />
+    <list default="true" id="888d3f2d-1a44-4650-b78b-ba574f7b695c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/app.conf" beforeDir="false" afterPath="$PROJECT_DIR$/conf/app.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/BlogController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/BlogController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/LoginController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/LoginController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/admin/AdminController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin/AdminController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/admin/ArticleController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin/ArticleController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/admin/BaseController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin/BaseController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/filter/admin.go" beforeDir="false" afterPath="$PROJECT_DIR$/filter/admin.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Init.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/Init.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/admin/AuthGroup.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/admin/AuthGroup.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/admin/Member.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/admin/Member.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/admin/Menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/admin/Menu.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/article/Article.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/article/Article.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/article/Category.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/article/Category.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/article/Comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/article/Comment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/article/Tag.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/article/Tag.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/routers/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/default_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/default_test.go" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" path="C:\Go" />
+  <component name="GOROOT" path="D:\Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -57,9 +78,10 @@
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../bgadmin" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -85,8 +107,27 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="go build bgadmin_example" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="bgadmin" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/main.go" />
+      <package value="bgadmin_example" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build bgadmin_example" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.conf" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

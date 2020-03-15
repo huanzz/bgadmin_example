@@ -1,14 +1,14 @@
 package article
 
 import (
-	"github.com/huanzz/bgadmin_example/models/admin"
+	"bgadmin_example/models/admin"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
 	"strings"
 	"time"
 	"log"
 	"errors"
-	common "github.com/huanzz/bgadmin_example/common"
+	common "bgadmin_example/common"
 )
 
 type Article struct {

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/huanzz/bgadmin_example/models"
-	"github.com/huanzz/bgadmin_example/models/admin"
-	_ "github.com/huanzz/bgadmin_example/routers"
+	"bgadmin_example/models"
+	"bgadmin_example/models/admin"
+	_ "bgadmin_example/routers"
 	"encoding/gob"
 	"github.com/astaxie/beego"
 	"os"

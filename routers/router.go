@@ -1,9 +1,9 @@
 package routers
 
 import (
-	"github.com/huanzz/bgadmin_example/controllers"
-	"github.com/huanzz/bgadmin_example/controllers/admin"
-	"github.com/huanzz/bgadmin_example/filter"
+	"bgadmin_example/controllers"
+	"bgadmin_example/controllers/admin"
+	"bgadmin_example/filter"
 	"github.com/astaxie/beego"
 )
 

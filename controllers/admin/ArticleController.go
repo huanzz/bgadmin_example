@@ -1,9 +1,9 @@
 package admin
 
 import (
-	common "github.com/huanzz/bgadmin_example/common"
-	admin "github.com/huanzz/bgadmin_example/models/admin"
-	m "github.com/huanzz/bgadmin_example/models/article"
+	common "bgadmin_example/common"
+	admin "bgadmin_example/models/admin"
+	m "bgadmin_example/models/article"
 	"log"
 	"strconv"
 )

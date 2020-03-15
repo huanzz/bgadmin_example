@@ -7,7 +7,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	"log"
 	"errors"
-	. "github.com/huanzz/bgadmin_example/common"
+	. "bgadmin_example/common"
 )
 
 type Tag struct {
